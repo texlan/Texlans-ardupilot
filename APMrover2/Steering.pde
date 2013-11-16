@@ -158,7 +158,7 @@ static void calc_nav_steer()
     // constrain to max G force
     lateral_acceleration = constrain_float(lateral_acceleration, -g.turn_max_g*GRAVITY_MSS, g.turn_max_g*GRAVITY_MSS);
 
-    channel_steer->servo_out = steerController.get_steering_out(lateral_acceleration);
+    channel_steer->servo_out = steerController.get_steering_out_lat_accel(lateral_acceleration);
 }
 
 /*****************************************
@@ -242,23 +242,4 @@ static void set_servos(void)
 #endif
 }
 
-static bool demoing_servos;
-
-static void demo_servos(uint8_t i) {
-
-    while(i > 0) {
-        gcs_send_text_P(SEVERITY_LOW,PSTR("Demo Servos!"));
-        demoing_servos = true;
-#if HIL_MODE == HIL_MODE_DISABLED || HIL_SERVOS
-        hal.rcout->write(1, 1400);
-        mavlink_delay(400);
-        hal.rcout->write(1, 1600);
-        mavlink_delay(200);
-        hal.rcout->write(1, 1500);
-#endif
-        demoing_servos = false;
-        mavlink_delay(400);
-        i--;
-    }
-}
 

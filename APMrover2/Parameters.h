@@ -50,6 +50,7 @@ public:
         k_param_serial0_baud,
         k_param_serial3_baud,
         k_param_telem_delay,
+        k_param_skip_gyro_cal,
 
         //
         // 130: Sensor parameters
@@ -58,11 +59,12 @@ public:
         k_param_steering_learn, // unused
 
         // 140: battery controls
-        k_param_battery_monitoring = 140,
-        k_param_volt_div_ratio,
-        k_param_curr_amp_per_volt,
+        k_param_battery_monitoring = 140,   // deprecated, can be deleted
+        k_param_volt_div_ratio,     // deprecated, can be deleted
+        k_param_curr_amp_per_volt,  // deprecated, can be deleted
         k_param_input_voltage, // deprecated, can be deleted
-        k_param_pack_capacity,
+        k_param_pack_capacity,      // deprecated, can be deleted
+        k_param_battery,
 
         //
         // 150: Navigation parameters
@@ -177,8 +179,6 @@ public:
 
     // IO pins
     AP_Int8     rssi_pin;
-    AP_Int8     battery_volt_pin;
-    AP_Int8     battery_curr_pin;
 
 	// Telemetry control
 	//
@@ -187,15 +187,10 @@ public:
     AP_Int8	    serial0_baud;
     AP_Int8	    serial3_baud;
     AP_Int8     telem_delay;
+    AP_Int8     skip_gyro_cal;
 
     // sensor parameters
-    AP_Int8	    compass_enabled;
-
-    // battery controls
-    AP_Int8	    battery_monitoring;	// 0=disabled, 3=voltage only, 4=voltage and current
-    AP_Float    volt_div_ratio;
-    AP_Float    curr_amp_per_volt;
-    AP_Int16    pack_capacity;		// Battery pack capacity less reserve    
+    AP_Int8	    compass_enabled; 
 
     // navigation parameters
     //
